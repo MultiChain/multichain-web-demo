@@ -52,12 +52,12 @@ System Requirements
 Create and launch a MultiChain Blockchain
 -----------------------------------------
 
-If you do not yet have a chain you want to explore, [Download MultiChain](http://www.multichain.com/download-install/) to install MultiChain and create a chain named `chain1` as follows:
+If you do not yet have a chain to work with, [Download MultiChain](http://www.multichain.com/download-install/) to install MultiChain and create a chain named `chain1` as follows:
 
     multichain-util create chain1
     multichaind chain1 -daemon
     
-If your web server is running on the same computer as the MultiChain node, you can skip the rest of this section. Otherwise:
+If your web server is running on the same computer as `multichaind`, you can skip the rest of this section. Otherwise:
 
     multichain-cli chain1 stop
 
