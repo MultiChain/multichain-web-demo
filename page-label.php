@@ -1,4 +1,4 @@
-<?
+<?php
 	if (@$_POST['setlabel']) {
 		$address=$_POST['address'];
 		
@@ -17,17 +17,17 @@
 				<div class="col-sm-12">
 					<h3>Set address label</h3>
 					
-					<form class="form-horizontal" method="post" action="./?chain=<?=html($_GET['chain'])?>&page=<?=html($_GET['page'])?>">
+					<form class="form-horizontal" method="post" action="./?chain=<?php echo html($_GET['chain'])?>&page=<?php echo html($_GET['page'])?>">
 						<div class="form-group">
 							<label for="address" class="col-sm-2 control-label">For address:</label>
 							<div class="col-sm-9">
-								<input class="form-control" name="address" id="address" value="<?=html($address)?>">
+								<input class="form-control" name="address" id="address" value="<?php echo html($address)?>">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="label" class="col-sm-2 control-label">Label:</label>
 							<div class="col-sm-9">
-								<input class="form-control" name="label" id="label" value="<?=html($labels[$address])?>">
+								<input class="form-control" name="label" id="label" value="<?php echo html($labels[$address])?>">
 							</div>
 						</div>
 						<div class="form-group">

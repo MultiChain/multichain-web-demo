@@ -29,8 +29,8 @@
 	</head>
 	<body>
 		<div class="container">
-			<h1><a href="./">MultiChain Demo</a><? if (strlen($name)) { ?> &ndash; <?=html($name)?><? } ?></h1>
-<?
+			<h1><a href="./">MultiChain Demo</a><?php if (strlen($name)) { ?> &ndash; <?php echo html($name)?><?php } ?></h1>
+<?php
 	if (strlen($chain)) {
 		$name=@$config[$chain]['name'];
 ?>
@@ -38,21 +38,21 @@
 			<nav class="navbar navbar-default">
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="./?chain=<?=html($chain)?>">Node</a></li>
-						<li><a href="./?chain=<?=html($chain)?>&page=permissions">Permissions</a></li>
-						<li><a href="./?chain=<?=html($chain)?>&page=issue" class="pair-first">Issue Asset</a></li>
-						<li><a href="./?chain=<?=html($chain)?>&page=update" class="pair-second">| Update</a></li>
-						<li><a href="./?chain=<?=html($chain)?>&page=send">Send</a></li>
-						<li><a href="./?chain=<?=html($chain)?>&page=offer" class="pair-first">Create Offer</a></li>
-						<li><a href="./?chain=<?=html($chain)?>&page=accept" class="pair-second">| Accept</a></li>
-						<li><a href="./?chain=<?=html($chain)?>&page=create">Create Stream</a></li>
-						<li><a href="./?chain=<?=html($chain)?>&page=publish">Publish</a></li>
-						<li><a href="./?chain=<?=html($chain)?>&page=view">View Streams</a></li>
+						<li><a href="./?chain=<?php echo html($chain)?>">Node</a></li>
+						<li><a href="./?chain=<?php echo html($chain)?>&page=permissions">Permissions</a></li>
+						<li><a href="./?chain=<?php echo html($chain)?>&page=issue" class="pair-first">Issue Asset</a></li>
+						<li><a href="./?chain=<?php echo html($chain)?>&page=update" class="pair-second">| Update</a></li>
+						<li><a href="./?chain=<?php echo html($chain)?>&page=send">Send</a></li>
+						<li><a href="./?chain=<?php echo html($chain)?>&page=offer" class="pair-first">Create Offer</a></li>
+						<li><a href="./?chain=<?php echo html($chain)?>&page=accept" class="pair-second">| Accept</a></li>
+						<li><a href="./?chain=<?php echo html($chain)?>&page=create">Create Stream</a></li>
+						<li><a href="./?chain=<?php echo html($chain)?>&page=publish">Publish</a></li>
+						<li><a href="./?chain=<?php echo html($chain)?>&page=view">View Streams</a></li>
 					</ul>
 				</div>
 			</nav>
 
-<?
+<?php
 		set_multichain_chain($config[$chain]);
 		
 		switch (@$_GET['page']) {
@@ -80,13 +80,13 @@
 			<p class="lead"><br/>Choose an available node to get started:</p>
 		
 			<p>
-<?
+<?php
 		foreach ($config as $chain => $rpc)
 			if (isset($rpc['rpchost']))
 				echo '<p class="lead"><a href="./?chain='.html($chain).'">'.html($rpc['name']).'</a><br/>';
 ?>
 			</p>
-<?
+<?php
 	}
 ?>
 		</div>

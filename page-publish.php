@@ -1,4 +1,4 @@
-<?
+<?php
 	$max_upload_size=multichain_max_data_size()-512; // take off space for file name and mime type
 
 	if (@$_POST['publish']) {
@@ -47,16 +47,16 @@
 				<div class="col-sm-12">
 					<h3>Publish to Stream</h3>
 					
-					<form class="form-horizontal" method="post" enctype="multipart/form-data"  action="./?chain=<?=html($_GET['chain'])?>&page=<?=html($_GET['page'])?>">
+					<form class="form-horizontal" method="post" enctype="multipart/form-data"  action="./?chain=<?php echo html($_GET['chain'])?>&page=<?php echo html($_GET['page'])?>">
 						<div class="form-group">
 							<label for="from" class="col-sm-2 control-label">From address:</label>
 							<div class="col-sm-9">
 							<select class="form-control" name="from" id="from">
-<?
+<?php
 	foreach ($sendaddresses as $address) {
 ?>
-								<option value="<?=html($address)?>"><?=format_address_html($address, true, $labels)?></option>
-<?
+								<option value="<?php echo html($address)?>"><?php echo format_address_html($address, true, $labels)?></option>
+<?php
 	}
 ?>						
 							</select>
@@ -66,12 +66,12 @@
 							<label for="name" class="col-sm-2 control-label">To stream:</label>
 							<div class="col-sm-9">
 							<select class="form-control" name="name" id="name">
-<?
+<?php
 	foreach ($liststreams as $stream) 
 		if ($stream['name']!='root') {
 ?>
-								<option value="<?=html($stream['name'])?>"><?=html($stream['name'])?></option>
-<?
+								<option value="<?php echo html($stream['name'])?>"><?php echo html($stream['name'])?></option>
+<?php
 		}
 ?>						
 							</select>
@@ -84,7 +84,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="upload" class="col-sm-2 control-label">Upload file:<br/><span style="font-size:75%; font-weight:normal;">Max <?=floor($max_upload_size/1024)?> KB</span></label>
+							<label for="upload" class="col-sm-2 control-label">Upload file:<br/><span style="font-size:75%; font-weight:normal;">Max <?php echo floor($max_upload_size/1024)?> KB</span></label>
 							<div class="col-sm-9">
 								<input class="form-control" type="file" name="upload" id="upload">
 							</div>

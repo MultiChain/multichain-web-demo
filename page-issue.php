@@ -1,4 +1,4 @@
-<?
+<?php
 	define('const_issue_custom_fields', 10);
 	
 	$max_upload_size=multichain_max_data_size()-512; // take off space for file name and mime type
@@ -84,31 +84,31 @@
 				<div class="col-sm-4">
 					<h3>Issued Assets</h3>
 			
-<?
+<?php
 	if (no_displayed_error_result($listassets, multichain('listassets', '*', true))) {
 
 		foreach ($listassets as $asset) {
 			$name=$asset['name'];
 			$issuer=$asset['issues'][0]['issuers'][0];
 ?>
-						<table class="table table-bordered table-condensed table-break-words <?=($success && ($name==@$_POST['name'])) ? 'bg-success' : 'table-striped'?>">
+						<table class="table table-bordered table-condensed table-break-words <?php echo ($success && ($name==@$_POST['name'])) ? 'bg-success' : 'table-striped'?>">
 							<tr>
 								<th style="width:30%;">Name</th>
-								<td><?=html($name)?> <?=$asset['open'] ? '' : '(closed)'?></td>
+								<td><?php echo html($name)?> <?php echo $asset['open'] ? '' : '(closed)'?></td>
 							</tr>
 							<tr>
 								<th>Quantity</td>
-								<td><?=html($asset['issueqty'])?></td>
+								<td><?php echo html($asset['issueqty'])?></td>
 							</tr>
 							<tr>
 								<th>Units</td>
-								<td><?=html($asset['units'])?></td>
+								<td><?php echo html($asset['units'])?></td>
 							</tr>
 							<tr>
 								<th>Issuer</td>
-								<td class="td-break-words small"><?=format_address_html($issuer, @$keymyaddresses[$issuer], $labels)?></td>
+								<td class="td-break-words small"><?php echo format_address_html($issuer, @$keymyaddresses[$issuer], $labels)?></td>
 							</tr>
-<?
+<?php
 			$details=array();
 			$detailshistory=array();
 			
@@ -122,7 +122,7 @@
 ?>
 							<tr>
 								<th>File:</th>
-								<td><?
+								<td><?php
 								
 				$countoutput=0;
 				$countprevious=count($detailshistory['@file'])-1;
@@ -151,7 +151,7 @@
 								
 								?></td>
 							</tr>	
-<?
+<?php
 			}
 			
 			foreach ($details as $key => $value) {
@@ -159,19 +159,19 @@
 					continue;
 ?>
 							<tr>
-								<th><?=html($key)?></th>
-								<td><?=html($value)?><?
+								<th><?php echo html($key)?></th>
+								<td><?php echo html($value)?><?php
 								
 				if (count($detailshistory[$key])>1)
 					echo '<br/><small>(previous values: '.html(implode(', ', array_slice(array_reverse($detailshistory[$key]), 1))).')</small>';
 				
 								?></td>
 							</tr>
-<?
+<?php
 			}
 ?>							
 						</table>
-<?
+<?php
 		}
 	}
 ?>
@@ -180,16 +180,16 @@
 				<div class="col-sm-8">
 					<h3>Issue Asset</h3>
 					
-					<form class="form-horizontal" method="post" enctype="multipart/form-data" action="./?chain=<?=html($_GET['chain'])?>&page=<?=html($_GET['page'])?>">
+					<form class="form-horizontal" method="post" enctype="multipart/form-data" action="./?chain=<?php echo html($_GET['chain'])?>&page=<?php echo html($_GET['page'])?>">
 						<div class="form-group">
 							<label for="from" class="col-sm-2 control-label">From address:</label>
 							<div class="col-sm-9">
 							<select class="form-control col-sm-6" name="from" id="from">
-<?
+<?php
 	foreach ($issueaddresses as $address) {
 ?>
-								<option value="<?=html($address)?>"><?=format_address_html($address, true, $labels)?></option>
-<?
+								<option value="<?php echo html($address)?>"><?php echo format_address_html($address, true, $labels)?></option>
+<?php
 	}
 ?>						
 							</select>
@@ -218,37 +218,37 @@
 							<label for="to" class="col-sm-2 control-label">To address:</label>
 							<div class="col-sm-9">
 							<select class="form-control col-sm-6" name="to" id="to">
-<?
+<?php
 	foreach ($receiveaddresses as $address) {
 		if ($address==$getinfo['burnaddress'])
 			continue;
 ?>
-								<option value="<?=html($address)?>"><?=format_address_html($address, @$keymyaddresses[$address], $labels)?></option>
-<?
+								<option value="<?php echo html($address)?>"><?php echo format_address_html($address, @$keymyaddresses[$address], $labels)?></option>
+<?php
 	}
 ?>						
 							</select>
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="upload" class="col-sm-2 control-label">Upload file:<br/><span style="font-size:75%; font-weight:normal;">Max <?=floor($max_upload_size/1024)?> KB</span></label>
+							<label for="upload" class="col-sm-2 control-label">Upload file:<br/><span style="font-size:75%; font-weight:normal;">Max <?php echo floor($max_upload_size/1024)?> KB</span></label>
 							<div class="col-sm-9">
 								<input class="form-control" type="file" name="upload" id="upload">
 							</div>
 						</div>
-<?
+<?php
 	for ($index=0; $index<const_issue_custom_fields; $index++) {
 ?>
 						<div class="form-group">
-							<label for="key<?=$index?>" class="col-sm-2 control-label"><?=$index ? '' : 'Custom fields:'?></label>
+							<label for="key<?php echo $index?>" class="col-sm-2 control-label"><?php echo $index ? '' : 'Custom fields:'?></label>
 							<div class="col-sm-3">
-								<input class="form-control input-sm" name="key<?=$index?>" id="key<?=$index?>" placeholder="key">
+								<input class="form-control input-sm" name="key<?php echo $index?>" id="key<?php echo $index?>" placeholder="key">
 							</div>
 							<div class="col-sm-6">
-								<input class="form-control input-sm" name="value<?=$index?>" id="value<?=$index?>" placeholder="value">
+								<input class="form-control input-sm" name="value<?php echo $index?>" id="value<?php echo $index?>" placeholder="value">
 							</div>
 						</div>
-<?
+<?php
 	}
 ?>
 						<div class="form-group">

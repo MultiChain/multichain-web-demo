@@ -1,4 +1,4 @@
-<?
+<?php
 	$const_permission_names=array(
 		'connect' => 'Connect',
 		'send' => 'Send',
@@ -58,7 +58,7 @@
 				<div class="col-sm-5">
 					<h3>Current Permissions</h3>
 			
-<?
+<?php
 	if (no_displayed_error_result($listpermissions, multichain('listpermissions'))) {
 		
 		$addresspermissions=array();
@@ -80,27 +80,27 @@
 				
 			$label=@$labels[$address];
 ?>
-						<table class="table table-bordered table-condensed table-break-words <?=($address==@$_POST['to']) ? 'bg-success' : 'table-striped'?>">
-<?
+						<table class="table table-bordered table-condensed table-break-words <?php echo ($address==@$_POST['to']) ? 'bg-success' : 'table-striped'?>">
+<?php
 			if (isset($label)) {
 ?>
 							<tr>
 								<th style="width:25%;">Label</th>
-								<td><?=html($label)?></td>
+								<td><?php echo html($label)?></td>
 							</tr>
-<?
+<?php
 			}
 ?>
 							<tr>
 								<th style="width:25%;">Address</th>
-								<td class="td-break-words small"><?=html($address)?><?=@$keymyaddresses[$address] ? ' (local)' : ''?></td>
+								<td class="td-break-words small"><?php echo html($address)?><?php echo @$keymyaddresses[$address] ? ' (local)' : ''?></td>
 							</tr>
 							<tr>
 								<th>Permissions</th>
-								<td><?=html($permissions_text)?></td>
+								<td><?php echo html($permissions_text)?></td>
 							</tr>
 						</table>
-<?
+<?php
 		}
 	}
 ?>
@@ -109,16 +109,16 @@
 				<div class="col-sm-7">
 					<h3>Change Permissions</h3>
 					
-					<form class="form-horizontal" method="post" action="./?chain=<?=html($_GET['chain'])?>&page=<?=html($_GET['page'])?>">
+					<form class="form-horizontal" method="post" action="./?chain=<?php echo html($_GET['chain'])?>&page=<?php echo html($_GET['page'])?>">
 						<div class="form-group">
 							<label for="from" class="col-sm-3 control-label">Admin address:</label>
 							<div class="col-sm-9">
 							<select class="form-control col-sm-6" name="from" id="from">
-<?
+<?php
 	foreach ($adminaddresses as $address) {
 ?>
-								<option value="<?=html($address)?>"><?=format_address_html($address, true, $labels)?></option>
-<?
+								<option value="<?php echo html($address)?>"><?php echo format_address_html($address, true, $labels)?></option>
+<?php
 	}
 ?>						
 							</select>
@@ -127,7 +127,7 @@
 						<div class="form-group">
 							<label for="to" class="col-sm-3 control-label">For address:</label>
 							<div class="col-sm-9">
-								<input class="form-control" name="to" id="to" placeholder="1..." value="<?=html($to)?>">
+								<input class="form-control" name="to" id="to" placeholder="1..." value="<?php echo html($to)?>">
 							</div>
 						</div>
 						<div class="form-group">
@@ -145,15 +145,15 @@
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Permissions:</label>
 							<div class="col-sm-9">
-<?
+<?php
 	foreach ($const_permission_names as $type => $label) {
 		if ($type=='issue')
 			echo '<br/>';
 ?> 
 								<label class="checkbox-inline">
-									<input type="checkbox" name="<?=html($type)?>" value="1"> <?=html($label)?> &nbsp;
+									<input type="checkbox" name="<?php echo html($type)?>" value="1"> <?php echo html($label)?> &nbsp;
 								</label>
-<?
+<?php
 	}
 ?>
 							</div>

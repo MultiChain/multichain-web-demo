@@ -1,4 +1,4 @@
-<?
+<?php
 	if (@$_POST['unlockoutputs'])
 		if (no_displayed_error_result($result, multichain('lockunspent', true)))
 			output_success_text('All outputs successfully unlocked');
@@ -23,7 +23,7 @@
 				<div class="col-sm-5">
 					<h3>Available Balances</h3>
 			
-<?
+<?php
 	$sendaddresses=array();
 	$usableaddresses=array();
 	$keymyaddresses=array();
@@ -64,22 +64,22 @@
 					
 					$label=@$labels[$address];
 ?>
-						<table class="table table-bordered table-condensed table-break-words <?=($address==@$getnewaddress) ? 'bg-success' : 'table-striped'?>">
-<?
+						<table class="table table-bordered table-condensed table-break-words <?php echo ($address==@$getnewaddress) ? 'bg-success' : 'table-striped'?>">
+<?php
 			if (isset($label)) {
 ?>
 							<tr>
 								<th style="width:25%;">Label</th>
-								<td><?=html($label)?></td>
+								<td><?php echo html($label)?></td>
 							</tr>
-<?
+<?php
 			}
 ?>
 							<tr>
 								<th style="width:25%;">Address</th>
-								<td class="td-break-words small"><?=html($address)?></td>
+								<td class="td-break-words small"><?php echo html($address)?></td>
 							</tr>
-<?
+<?php
 					foreach ($allbalances as $balance) {
 						$unlockedqty=floatval($assetunlocked[$balance['name']]);
 						$lockedqty=$balance['qty']-$unlockedqty;
@@ -90,14 +90,14 @@
 							$keyusableassets[$balance['name']]=true;
 ?>
 							<tr>
-								<th><?=html($balance['name'])?></th>
-								<td><?=html($unlockedqty)?><?=($lockedqty>0) ? (' ('.$lockedqty.' locked)') : ''?></td>
+								<th><?php echo html($balance['name'])?></th>
+								<td><?php echo html($unlockedqty)?><?php echo ($lockedqty>0) ? (' ('.$lockedqty.' locked)') : ''?></td>
 							</tr>
-<?
+<?php
 					}
 ?>
 						</table>
-<?
+<?php
 				}
 			}
 		}
@@ -105,10 +105,10 @@
 	
 	if ($haslocked) {
 ?>
-				<form class="form-horizontal" method="post" action="./?chain=<?=html($_GET['chain'])?>&page=<?=html($_GET['page'])?>">
+				<form class="form-horizontal" method="post" action="./?chain=<?php echo html($_GET['chain'])?>&page=<?php echo html($_GET['page'])?>">
 					<input class="btn btn-default" type="submit" name="unlockoutputs" value="Unlock all outputs">
 				</form>
-<?
+<?php
 	}
 ?>
 				</div>
@@ -116,16 +116,16 @@
 				<div class="col-sm-7">
 					<h3>Create Offer</h3>
 					
-					<form class="form-horizontal" method="post" action="./?chain=<?=html($_GET['chain'])?>&page=<?=html($_GET['page'])?>">
+					<form class="form-horizontal" method="post" action="./?chain=<?php echo html($_GET['chain'])?>&page=<?php echo html($_GET['page'])?>">
 						<div class="form-group">
 							<label for="from" class="col-sm-3 control-label">From address:</label>
 							<div class="col-sm-9">
 							<select class="form-control" name="from" id="from">
-<?
+<?php
 	foreach ($usableaddresses as $address) {
 ?>
-								<option value="<?=html($address)?>"><?=format_address_html($address, true, $labels)?></option>
-<?
+								<option value="<?php echo html($address)?>"><?php echo format_address_html($address, true, $labels)?></option>
+<?php
 	}
 ?>						
 							</select>
@@ -135,11 +135,11 @@
 							<label for="offerasset" class="col-sm-3 control-label">Offer asset:</label>
 							<div class="col-sm-9">
 							<select class="form-control" name="offerasset" id="offerasset">
-<?
+<?php
 	foreach ($keyusableassets as $asset => $dummy) {
 ?>
-								<option value="<?=html($asset)?>"><?=html($asset)?></option>
-<?
+								<option value="<?php echo html($asset)?>"><?php echo html($asset)?></option>
+<?php
 	}
 ?>						
 							</select>
@@ -155,11 +155,11 @@
 							<label for="askasset" class="col-sm-3 control-label">Ask asset:</label>
 							<div class="col-sm-9">
 							<select class="form-control" name="askasset" id="askasset">
-<?
+<?php
 	foreach ($allassets as $asset) {
 ?>
-								<option value="<?=html($asset)?>"><?=html($asset)?></option>
-<?
+								<option value="<?php echo html($asset)?>"><?php echo html($asset)?></option>
+<?php
 	}
 ?>						
 							</select>
