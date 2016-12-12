@@ -45,7 +45,7 @@ System Requirements
 -------------------
 
 * A computer running web server software such as Apache.
-* PHP 5.x or later.
+* PHP 5.x or later with the `curl` extension.
 * MultiChain 1.0 alpha 26 or later.
 
 
