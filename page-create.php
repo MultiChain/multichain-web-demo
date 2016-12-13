@@ -38,7 +38,7 @@
 								<td><?php echo html($stream['name'])?></td>
 							</tr>
 							<tr>
-								<th>Opened by</td>
+								<th>Opened by</th>
 								<td class="td-break-words small"><?php echo format_address_html($stream['creators'][0], false, $labels)?></td>
 							</tr>
 							<tr>

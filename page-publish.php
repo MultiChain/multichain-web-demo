@@ -80,7 +80,7 @@
 						<div class="form-group">
 							<label for="key" class="col-sm-2 control-label">Optional key:</label>
 							<div class="col-sm-9">
-								<input class="form-control" name="key" id="key"></textarea>
+								<input class="form-control" name="key" id="key">
 							</div>
 						</div>
 						<div class="form-group">

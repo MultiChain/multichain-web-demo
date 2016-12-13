@@ -132,11 +132,11 @@
 							?></td>
 						</tr>
 						<tr>
-							<th>Key</td>
+							<th>Key</th>
 							<td><a href="./?chain=<?php echo html($_GET['chain'])?>&page=<?php echo html($_GET['page'])?>&stream=<?php echo html($viewstream['createtxid'])?>&key=<?php echo html($item['key'])?>"><?php echo html($item['key'])?></a></td>
 						</tr>
 						<tr>
-							<th>Data</td>
+							<th>Data</th>
 							<td><?php
 				
 				if (is_array($item['data'])) { // long data item
@@ -164,7 +164,7 @@
 							?></td>
 						</tr>
 						<tr>
-							<th>Added</td>
+							<th>Added</th>
 							<td><?php echo gmdate('Y-m-d H:i:s', isset($item['blocktime']) ? $item['blocktime'] : $item['time'])?> GMT<?php echo isset($item['blocktime']) ? ' (confirmed)' : ''?></td>
 						</tr>
 					</table>
