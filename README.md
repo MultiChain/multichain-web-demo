@@ -99,6 +99,8 @@ Multiple chains are supported by the web demo by copying the same section again 
 	another.rpchost=...
 	...
 
+**Note that the `config.txt` file is readable by users of your web demo installation, and contains your MultiChain API password, so you should never use this basic setup for a production system.**
+
 
 Launch the Web Demo
 -------------------
