@@ -10,8 +10,8 @@
 	$viewstream=null;
 	
 	foreach ($liststreams as $stream) {
-		if ($_POST['subscribe_'.$stream['streamref']])
-			if (no_displayed_error_result($result, multichain('subscribe', $stream['streamref']))) {
+		if ($_POST['subscribe_'.$stream['createtxid']])
+			if (no_displayed_error_result($result, multichain('subscribe', $stream['createtxid']))) {
 				output_success_text('Successfully subscribed to stream: '.$stream['name']);
 				$subscribed=true;
 			}
@@ -54,7 +54,7 @@
 					else
 						$suffix='';
 ?>	
-								<td><?php echo html($stream['name'])?> &nbsp; <input class="btn btn-default btn-xs" type="submit" name="subscribe_<?php echo html($stream['streamref'])?>" value="Subscribe<?php echo $suffix?>"></td>
+								<td><?php echo html($stream['name'])?> &nbsp; <input class="btn btn-default btn-xs" type="submit" name="subscribe_<?php echo html($stream['createtxid'])?>" value="Subscribe<?php echo $suffix?>"></td>
 <?php
 				}
 ?>
