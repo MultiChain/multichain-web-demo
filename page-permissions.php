@@ -31,7 +31,7 @@
 		$to=$_POST['to'];
 
 	} else
-		$to=$_GET['address'];
+		$to=@$_GET['address'];
 
 	$adminaddresses=array();
 	$keymyaddresses=array();
