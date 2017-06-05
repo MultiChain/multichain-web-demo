@@ -11,14 +11,17 @@
 		
 		foreach ($askoffer['assets'] as $asset)
 			$assets[$asset['name']]=$asset['qty'];
-			
+		
+		if (!count($assets))
+			$assets=0; // to prevent it being converted to empty JSON array instead of object
+		
 		return $assets;
 	}
 	
 	if (@$_POST['decodeoffer'] || @$_POST['completeoffer']) {
 		if (no_displayed_error_result($decoded, multichain('decoderawexchange', $_POST['hex']))) {
 
-			if ($_POST['completeoffer']) {
+			if (@$_POST['completeoffer']) {
 				if (no_displayed_error_result($prepare, multichain('preparelockunspentfrom', $_POST['from'], ask_offer_to_assets($decoded['ask'])))) {
 						// output_success_text('Exchange successfully prepared using transaction '.$prepare['txid']);
 			
