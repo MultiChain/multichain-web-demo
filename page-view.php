@@ -8,9 +8,11 @@
 
 	$subscribed=false;
 	$viewstream=null;
+
+	$_GET['stream'] = isset($_GET['stream']) ? $_GET['stream'] : "";
 	
 	foreach ($liststreams as $stream) {
-		if ($_POST['subscribe_'.$stream['createtxid']])
+		if (isset($_POST['subscribe_'.$stream['createtxid']]))
 			if (no_displayed_error_result($result, multichain('subscribe', $stream['createtxid']))) {
 				output_success_text('Successfully subscribed to stream: '.$stream['name']);
 				$subscribed=true;
