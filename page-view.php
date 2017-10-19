@@ -10,13 +10,13 @@
 	$viewstream=null;
 	
 	foreach ($liststreams as $stream) {
-		if ($_POST['subscribe_'.$stream['createtxid']])
+		if (@$_POST['subscribe_'.$stream['createtxid']])
 			if (no_displayed_error_result($result, multichain('subscribe', $stream['createtxid']))) {
 				output_success_text('Successfully subscribed to stream: '.$stream['name']);
 				$subscribed=true;
 			}
 			
-		if ($_GET['stream']==$stream['createtxid'])
+		if (@$_GET['stream']==$stream['createtxid'])
 			$viewstream=$stream;
 	}			
 			
