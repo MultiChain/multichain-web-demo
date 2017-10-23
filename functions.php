@@ -4,7 +4,7 @@
 	{
 		$config=array();
 		
-		$contents=file_get_contents('config.txt');
+		$contents=file_get_contents('config.php');
 		$lines=explode("\n", $contents);
 		
 		foreach ($lines as $line) {
