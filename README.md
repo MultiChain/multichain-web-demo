@@ -81,9 +81,9 @@ Make your life easy for the next step by running these on the node's server:
     cat ~/.multichain/chain1/multichain.conf
     grep rpc-port ~/.multichain/chain1/params.dat
     
-In the web demo directory, copy the `config-example.txt` file to `config.txt`:
+In the web demo directory, copy the `config-example.php` file to `config.php`:
 
-	cp config-example.txt config.txt
+	cp config-example.php config.php
   
 In the demo website directory, enter chain details in `config.txt` e.g.:
 
@@ -98,8 +98,6 @@ Multiple chains are supported by the web demo by copying the same section again 
 	another.name=...
 	another.rpchost=...
 	...
-
-**Note that the `config.txt` file is readable by users of your web demo installation, and contains your MultiChain API password, so you should never use this basic setup for a production system.**
 
 
 Launch the Web Demo
