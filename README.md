@@ -91,7 +91,7 @@ In the demo website directory, enter chain details in `config.txt` e.g.:
 
     default.name=Default                # name to display in the web interface
     default.rpchost=127.0.0.1           # IP address of MultiChain node
-    default.rpcport=12345               # see rpc-port from chain parameters
+    default.rpcport=12345               # usually default-rpc-port from params.dat
     default.rpcuser=multichainrpc       # username for RPC from multichain.conf
     default.rpcpassword=mnBh8aHp4mun... # password for RPC from multichain.conf
 
