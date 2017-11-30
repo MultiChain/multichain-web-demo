@@ -48,6 +48,8 @@ System Requirements
 * PHP 5.x or later with the `curl` extension.
 * MultiChain 1.0 alpha 26 or later.
 
+**Note that this Web Demo does not yet support MultiChain 2.0 preview releases.**
+
 
 Create and launch a MultiChain Blockchain
 -----------------------------------------
