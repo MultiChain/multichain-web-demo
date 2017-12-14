@@ -3,6 +3,8 @@
 	
 	$max_upload_size=multichain_max_data_size()-512; // take off space for file name and mime type
 
+	$success=false; // set default value
+
 	if (@$_POST['issueasset']) {
 		$multiple=(int)round(1/$_POST['units']);
 		
