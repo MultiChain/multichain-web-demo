@@ -83,28 +83,42 @@ Make your life easy for the next step by running these on the node's server:
     cat ~/.multichain/chain1/multichain.conf
     grep rpc-port ~/.multichain/chain1/params.dat
     
-In the web demo directory, copy the `config-example.txt` file to `config.txt`:
+In the web demo directory, copy the `config-example.ini` file to `config.ini`:
 
-	cp config-example.txt config.txt
+	cp config-example.ini config.ini
+
+or on Windows:
+
+	copy config-example.ini config.ini
+
   
-In the demo website directory, enter chain details in `config.txt` e.g.:
+In the demo website directory, enter chain details in `config.ini` e.g.:
 
-    default.name=Default                # name to display in the web interface
-    default.rpchost=127.0.0.1           # IP address of MultiChain node
-    default.rpcport=12345               # usually default-rpc-port from params.dat
-    default.rpcuser=multichainrpc       # username for RPC from multichain.conf
-    default.rpcpassword=mnBh8aHp4mun... # password for RPC from multichain.conf
+    [default]
+    name=Default                ; name to display in the web interface
+    rpchost=127.0.0.1           ; IP address of MultiChain node
+    rpcport=12345               ; usually default-rpc-port from params.dat
+    rpcuser=multichainrpc       ; username for RPC from multichain.conf
+    rpcpassword=mnBh8aHp4mun... ; password for RPC from multichain.conf
 
-Multiple chains are supported by the web demo by copying the same section again but with different prefixes before the period, for example:
+Multiple chains are supported by the web demo by copying the same section again but with different string for the section name in the square brackets, for example:
 
-	another.name=...
-	another.rpchost=...
+    [another]
+	name=...
+	rpchost=...
 	...
 
-**Note that the `config.txt` file is readable by users of your web demo installation, and contains your MultiChain API password, so you should never use this basic setup for a production system.**
+**Note that the `config.ini` file is readable by users of your web demo installation, and contains your MultiChain API password, so you should never use this basic setup for a production system.**
 
+For additional security the `config.ini` file can be placed in a parent directory of the web demo. By default the `read_config()` function will look for the specified configuration file up to three directory levels above the web demo.
 
 Launch the Web Demo
 -------------------
 
 No additional configuration or setup is required. Based on where you installed the web demo, open the appropriate address in your web browser, and you are ready to go!
+
+From PHP 5.4.0 it's possible to run the web demo from the command line using the built-in web server. To run the web demo using the provided web server, execute the following command from within the web demo directory:
+
+    php -S localhost:8080 -t .
+
+The web demo application will now be accessible through your web browser on the "`http://localhost:8080/`" address.
