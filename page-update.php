@@ -21,7 +21,7 @@
 		
 		$custom=array();
 		
-		for ($index=0; $index<const_issue_custom_fields; $index++)
+		for ($index=0; $index<const_update_custom_fields; $index++)
 			if (strlen(@$_POST['key'.$index]))
 				$custom[$_POST['key'.$index]]=$_POST['value'.$index];
 
