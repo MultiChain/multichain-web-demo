@@ -2,7 +2,9 @@
 	define('const_update_custom_fields', 5);
 	
 	$max_upload_size=multichain_max_data_size()-512; // take off space for file name and mime type
-		
+
+	$success=false; // set default value
+
 	if (@$_POST['updateasset']) {
 		if (!no_displayed_error_result($listassets, multichain('listassets', $_POST['issuetxid'], true)))
 			return;

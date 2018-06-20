@@ -1,4 +1,7 @@
 <?php
+
+	$success=false; // set default value
+
 	if (@$_POST['createstream']) {
 		$success=no_displayed_error_result($createtxid, multichain('createfrom',
 			$_POST['from'], 'stream', $_POST['name'], true));
