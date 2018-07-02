@@ -25,6 +25,11 @@
 	
 	function json_rpc_send($host, $port, $user, $password, $method, $params=array())
 	{
+		if (!function_exists('curl_init')) {
+			echo '<div class="bg-danger" style="padding:1em;">This web demo requires the curl extension for PHP. Please contact your web hosting provider or system administrator for assistance.</div>';
+			exit;
+		}
+		
 		$url='http://'.$host.':'.$port.'/';
 				
 		$payload=json_encode(array(
