@@ -24,6 +24,7 @@
 
 		$datas=array( // to create array of data items
 			array( // metadata for issuance details
+				'create' => 'asset',
 				'name' => $_POST['name'],
 				'multiple' => $multiple,
 				'open' => true,

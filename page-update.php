@@ -29,6 +29,7 @@
 
 		$datas=array( // to create array of data items
 			array( // metadata for reissuance details
+				'update' => $_POST['issuetxid'],
 				'details' => $custom,
 			)
 		);
