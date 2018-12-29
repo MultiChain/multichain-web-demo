@@ -26,7 +26,7 @@
 	function json_rpc_send($host, $port, $user, $password, $method, $params=array())
 	{
 		if (!function_exists('curl_init')) {
-			echo '<div class="bg-danger" style="padding:1em;">This web demo requires the curl extension for PHP. Please contact your web hosting provider or system administrator for assistance.</div>';
+			output_html_error('This web demo requires the curl extension for PHP. Please contact your web hosting provider or system administrator for assistance.');
 			exit;
 		}
 		
@@ -84,9 +84,14 @@
 			$multichain_chain['rpcpassword'], $method, array_slice($args, 1));
 	}
 	
+	function output_html_error($html)
+	{
+		echo '<div class="bg-danger" style="padding:1em;">Error: '.$html.'</div>';
+	}
+	
 	function output_rpc_error($error)
 	{
-		echo '<div class="bg-danger" style="padding:1em;">Error: '.html($error['code']).'<br/>'.html($error['message']).'</div>';
+		output_html_error(html($error['code']).'<br/>'.html($error['message']));
 	}
 	
 	function output_success_text($success)
@@ -144,6 +149,33 @@
 			no_displayed_error_result($multichain_getinfo, multichain('getinfo'));
 		
 		return $multichain_getinfo;
+	}
+	
+	function multichain_has_protocol($version)
+	{
+		$getinfo=multichain_getinfo();
+		
+		return $getinfo['protocolversion']>=$version;
+	}
+		
+	function multichain_has_multi_item_keys()
+	{
+		return multichain_has_protocol(20001);
+	}
+	
+	function multichain_has_json_text_items()
+	{
+		return multichain_has_protocol(20001);
+	}
+	
+	function multichain_has_custom_permissions()
+	{
+		return multichain_has_protocol(20003);
+	}
+	
+	function multichain_has_off_chain_items()
+	{
+		return multichain_has_protocol(20003);
 	}
 	
 	function multichain_labels()

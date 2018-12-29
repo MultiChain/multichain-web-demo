@@ -10,6 +10,16 @@
 		'admin' => 'Admin',
 	);
 	
+	if (multichain_has_custom_permissions())
+		$const_permission_names=array_merge($const_permission_names, array(
+			'high1' => 'High 1',
+			'high2' => 'High 2',
+			'high3' => 'High 3',
+			'low1' => 'Low 1',
+			'low2' => 'Low 2',
+			'low3' => 'Low 3',
+		));
+	
 	if (@$_POST['grantrevoke']) {
 		$permissions=array();
 		
@@ -139,7 +149,6 @@
 								<label class="radio-inline">
 									<input type="radio" name="operation" id="operation" value="revoke"> Revoke
 								</label>
-
 							</div>
 						</div>
 						<div class="form-group">
@@ -147,7 +156,7 @@
 							<div class="col-sm-9">
 <?php
 	foreach ($const_permission_names as $type => $label) {
-		if ($type=='issue')
+		if ( ($type=='create') || ($type=='activate') || ($type=='high1') || ($type=='low1') )
 			echo '<br/>';
 ?> 
 								<label class="checkbox-inline">

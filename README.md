@@ -5,7 +5,7 @@ MultiChain Web Demo is a simple web interface for [MultiChain](http://www.multic
 
 https://github.com/MultiChain/multichain-web-demo
 
-    Copyright(C) 2015,2016 by Coin Sciences Ltd.
+    Copyright(C) Coin Sciences Ltd.
     License: GNU Affero General Public License, see the file LICENSE.txt.
 
 
@@ -18,18 +18,19 @@ It currently supports the following features:
 
 * Viewing the node's overall status.
 * Creating addresses and giving them real names (names are visible to all nodes).
-* Changing permissions for addresses.
+* Changing global permissions for addresses.
 * Issuing assets, including custom fields and uploading a file.
 * Updating assets, including issuing more units and updating custom fields and file.
 * Viewing issued assets, including the full history of fields and files.
 * Sending assets from one address to another.
 * Creating, decoding and accepting offers for exchanges of assets.
 * Creating streams.
-* Publishing items to streams, either as text or an uploaded file.
+* Publishing items to streams, as JSON or text or an uploaded file.
 * Viewing stream items, including listing by key or publisher and downloading files.
 
 The web demo does not yet support the following important functionality in the MultiChain API:
 
+* Managing per-asset and per-stream permissions.
 * Multisignature addresses and transactions.
 * Adding metadata (or stream items) to permissions or asset transactions.
 * Viewing an addresses' transactions.
@@ -37,6 +38,9 @@ The web demo does not yet support the following important functionality in the M
 * Viewing a list of keys or publishers in a stream.
 * Peer-to-peer node management.
 * Message signing and verification.
+* Blockchain upgrading.
+* Writing and testing Smart Filters.
+* Working with the binary cache.
 
 The MultiChain Web Demo is still under development, so please [contact us](http://www.multichain.com/contact-us/) if any of these things are crucial for your needs.
 
@@ -45,10 +49,8 @@ System Requirements
 -------------------
 
 * A computer running web server software such as Apache.
-* PHP 5.x or later with the `curl` extension.
-* MultiChain 1.0 alpha 26 or later.
-
-**Note that this Web Demo does not yet support MultiChain 2.0 preview releases.**
+* PHP 5.x or later with the `curl` and `JSON` extensions.
+* MultiChain 1.0 alpha 26 or later, including MultiChain 2.0 alphas and betas.
 
 
 Create and launch a MultiChain Blockchain

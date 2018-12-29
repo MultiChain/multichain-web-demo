@@ -116,6 +116,8 @@
 			
 			foreach ($items as $item) {
 				$oneoutput=true;
+				$keys=isset($item['keys']) ? $item['keys'] : array($item['key']); // support MultiChain 2.0 or 1.0
+
 ?>
 					<table class="table table-bordered table-condensed table-striped table-break-words">
 						<tr>
@@ -124,44 +126,69 @@
 							
 				foreach ($item['publishers'] as $publisher) {
 					$link='./?chain='.$_GET['chain'].'&page='.$_GET['page'].'&stream='.$viewstream['createtxid'].'&publisher='.$publisher;
-					
-							?><?php echo format_address_html($publisher, false, $labels, $link)?><?php
-							
+					echo format_address_html($publisher, false, $labels, $link).'&nbsp;';
 				}
 							
 							?></td>
 						</tr>
 						<tr>
-							<th>Key</th>
-							<td><a href="./?chain=<?php echo html($_GET['chain'])?>&page=<?php echo html($_GET['page'])?>&stream=<?php echo html($viewstream['createtxid'])?>&key=<?php echo html($item['key'])?>"><?php echo html($item['key'])?></a></td>
+							<th>Key(s)</th>
+							<td><?php
+							
+				foreach ($keys as $key) {
+					$link='./?chain='.$_GET['chain'].'&page='.$_GET['page'].'&stream='.$viewstream['createtxid'].'&key='.$key;
+					echo format_address_html($key, false, $labels, $link).'&nbsp;';
+				}
+
+							?></td>
 						</tr>
 						<tr>
-							<th>Data</th>
-							<td><?php
+							<th><?php
 				
-				if (is_array($item['data'])) { // long data item
-					if (no_displayed_error_result($txoutdata, multichain('gettxoutdata', $item['data']['txid'], $item['data']['vout'], 1024))) // get prefix only for file name
-						$binary=pack('H*', $txoutdata);
-					else
-						$binary='';
-						
-					$size=$item['data']['size'];
+				if ( isset($item['available']) && !$item['available'] ) {
+					$showlabel='Data';
+					$showhtml='<em>Not available. Either the data is off-chain and has not yet been delivered, or this item was rejected by a stream filter.</em>';
 				
-				} else {
-					$binary=pack('H*', $item['data']);
-					$size=strlen($binary);
-				}
-				
-				$file=txout_bin_to_file($binary);
+				} elseif ( is_array($item['data']) && array_key_exists('json', $item['data']) ) { // MultiChain 2.0 JSON item
+					$showlabel='JSON data';
+					$showhtml='<span style="white-space:pre; display: block; font-family: monospace; overflow:hidden;">'.html(json_encode($item['data']['json'], JSON_PRETTY_PRINT)).'</pre>';
 					
-				if (is_array($file))
-					echo '<a href="./download-file.php?chain='.html($_GET['chain']).'&txid='.html($item['txid']).'&vout='.html($item['vout']).'">'.
+				} elseif ( is_array($item['data']) && array_key_exists('text', $item['data']) ) { // MultiChain 2.0 text item
+					$showlabel='Text data';
+					$showhtml=html($item['data']['text']);
+					
+				} else { // binary item
+					if (is_array($item['data'])) { // long binary data item
+						if (no_displayed_error_result($txoutdata, multichain('gettxoutdata', $item['data']['txid'], $item['data']['vout'], 1024))) // get prefix only for file name
+							$binary=pack('H*', $txoutdata);
+						else
+							$binary='';
+					
+						$size=$item['data']['size'];
+
+					} else {
+						$binary=pack('H*', $item['data']);
+						$size=strlen($binary);
+					}
+				
+					$file=txout_bin_to_file($binary); // see if file embedded as binary
+					
+					if (is_array($file)) {
+						$showlabel='File';
+						$showhtml='<a href="./download-file.php?chain='.html($_GET['chain']).'&txid='.html($item['txid']).'&vout='.html($item['vout']).'">'.
 							(strlen($file['filename']) ? html($file['filename']) : 'Download').
 							'</a>'.' ('.number_format(ceil($size/1024)).' KB)'; // ignore first few bytes of size
-				else
-					echo html($binary);
+
+					} else {
+						$showlabel='Data';
+						$showhtml=html($binary);
+					}
+				}
+				
+				echo $showlabel;
 					
-							?></td>
+							?></th>
+							<td><?php echo $showhtml?></td>
 						</tr>
 						<tr>
 							<th>Added</th>

@@ -39,7 +39,7 @@
 			$upload_size=filesize($upload_file);
 
 			if ($upload_size>$max_upload_size) {
-				echo '<div class="bg-danger" style="padding:1em;">Uploaded file is too large ('.number_format($upload_size).' > '.number_format($max_upload_size).' bytes).</div>';
+				output_html_error('Uploaded file is too large ('.number_format($upload_size).' > '.number_format($max_upload_size).' bytes).');
 				return;
 
 			} else {
