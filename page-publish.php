@@ -19,7 +19,7 @@
 
 		} elseif (multichain_has_json_text_items()) { // use native JSON and text objects in MultiChain 2.0
 			if (strlen($_POST['json'])) {
-				$json=json_decode($_POST['json'], true);
+				$json=json_decode($_POST['json']);
 				
 				if ($json===null) {
 					output_html_error('The entered JSON structure does not appear to be valid');
@@ -33,7 +33,7 @@
 		} else // convert entered text to binary for MultiChain 1.0
 			$data=bin2hex(string_to_txout_bin($_POST['text']));
 			
-		$keys=preg_split('/\n|\r\n?/', $_POST['key']);
+		$keys=preg_split('/\n|\r\n?/', trim($_POST['key']));
 		if (count($keys)<=1) // convert to single key parameter if only one key
 			$keys=$keys[0];
 		

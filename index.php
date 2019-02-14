@@ -10,6 +10,8 @@
 	else
 		$name='';
 
+	set_multichain_chain($config[$chain]);
+		
 ?>
 <html>
 	<head>
@@ -36,7 +38,7 @@
 ?>
 			
 			<nav class="navbar navbar-default">
-				<div id="navbar" class="navbar-collapse collapse">
+				<div id="navbar" class="navbar-collapse collape">
 					<ul class="nav navbar-nav">
 						<li><a href="./?chain=<?php echo html($chain)?>">Node</a></li>
 						<li><a href="./?chain=<?php echo html($chain)?>&page=permissions">Permissions</a></li>
@@ -48,13 +50,23 @@
 						<li><a href="./?chain=<?php echo html($chain)?>&page=create">Create Stream</a></li>
 						<li><a href="./?chain=<?php echo html($chain)?>&page=publish">Publish</a></li>
 						<li><a href="./?chain=<?php echo html($chain)?>&page=view">View Streams</a></li>
+
+<?php
+	if (multichain_has_smart_filters()) {
+?>						
+
+						<li><a href="./?chain=<?php echo html($chain)?>&page=txfilter" class="pair-first">Filters: Transaction</a></li>
+						<li><a href="./?chain=<?php echo html($chain)?>&page=streamfilter" class="pair-second">| Stream</a></li>
+
+<?
+	}
+?>
+
 					</ul>
 				</div>
 			</nav>
 
 <?php
-		set_multichain_chain($config[$chain]);
-		
 		switch (@$_GET['page']) {
 			case 'label':
 			case 'permissions':
@@ -66,6 +78,9 @@
 			case 'create':
 			case 'publish':
 			case 'view':
+			case 'txfilter':
+			case 'streamfilter':
+			case 'approve':
 			case 'asset-file':
 				require_once 'page-'.$_GET['page'].'.php';
 				break;

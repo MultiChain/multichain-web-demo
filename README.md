@@ -27,6 +27,7 @@ It currently supports the following features:
 * Creating streams.
 * Publishing items to streams, as JSON or text or an uploaded file.
 * Viewing stream items, including listing by key or publisher and downloading files.
+* Writing, testing and approving Smart Filters (both transaction and stream filters).
 
 The web demo does not yet support the following important functionality in the MultiChain API:
 
@@ -39,7 +40,6 @@ The web demo does not yet support the following important functionality in the M
 * Peer-to-peer node management.
 * Message signing and verification.
 * Blockchain upgrading.
-* Writing and testing Smart Filters.
 * Working with the binary cache.
 
 The MultiChain Web Demo is still under development, so please [contact us](http://www.multichain.com/contact-us/) if any of these things are crucial for your needs.
