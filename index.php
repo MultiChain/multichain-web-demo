@@ -38,7 +38,7 @@
 ?>
 			
 			<nav class="navbar navbar-default">
-				<div id="navbar" class="navbar-collapse collape">
+				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<li><a href="./?chain=<?php echo html($chain)?>">Node</a></li>
 						<li><a href="./?chain=<?php echo html($chain)?>&page=permissions">Permissions</a></li>
