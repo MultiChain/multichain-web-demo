@@ -194,7 +194,7 @@
 						<div class="form-group">
 							<label for="keys" class="col-sm-3 control-label">Test publish item keys:</label>
 							<div class="col-sm-9">
-								<textarea class="form-control" rows="3" name="keys" id="keys"><?=html(@$_POST['keys'])?></textarea>
+								<textarea class="form-control" rows="3" name="keys" id="keys"><?php echo html(@$_POST['keys'])?></textarea>
 								<span id="helpBlock" class="help-block">To use multiple keys, enter one per line.</span>
 							</div>
 						</div>
@@ -211,7 +211,7 @@
 						<div class="form-group">
 							<label for="data" class="col-sm-3 control-label"></label>
 							<div class="col-sm-9">
-								<textarea class="form-control" rows="8" name="data" id="data"><?=html(@$_POST['data'])?></textarea>
+								<textarea class="form-control" rows="8" name="data" id="data"><?php echo html(@$_POST['data'])?></textarea>
 							</div>
 						</div>
 						<div class="form-group">
