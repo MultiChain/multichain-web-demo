@@ -30,29 +30,39 @@
 			output_success_text('Filter successfully created in transaction '.$createtxid);
 	}
 	
-	if (@$_POST['testtxfiltersend']) {
+	$sendrawtx=null;
+	
+	if (@$_POST['testtxfiltersend'])
 		if (no_displayed_error_result($createrawsendfrom, multichain('createrawsendfrom',
 			$_POST['sendfrom'], array($_POST['to'] => array($_POST['asset'] => floatval($_POST['qty']))), array(), 'sign'
 		))) {
+			$sendrawtx=$createrawsendfrom['hex'];
+			$showcallbacks=$_POST['sendcallbacks'];
+		}
+	
+	if (@$_POST['testtxfilterraw']) {
+		$sendrawtx=trim($_POST['rawtx']);
+		$showcallbacks=$_POST['rawcallbacks'];
+	}
+	
+	if (isset($sendrawtx)) {
+		if (no_displayed_error_result($testtxfilter, multichain_with_raw(
+			$testtxfilterraw, 'testtxfilter', $restrictions, $_POST['code'], $sendrawtx
+		))) {
 
-			if (no_displayed_error_result($testtxfilter, multichain_with_raw(
-				$testtxfilterraw, 'testtxfilter', $restrictions, $_POST['code'], $createrawsendfrom['hex']
-			))) {
+			if ($testtxfilter['compiled']) {
+				$suffix=' (time taken '.number_format($testtxfilter['time'], 6).' seconds)';
 
-				if ($testtxfilter['compiled']) {
-					$suffix=' (time taken '.number_format($testtxfilter['time'], 6).' seconds)';
-
-					if ($testtxfilter['passed'])
-						output_success_text('Filter code allowed this transaction'.$suffix);
-					else
-						output_error_text('Filter code blocked this transaction with the reason: '.$suffix."\n".$testtxfilter['reason']);
+				if ($testtxfilter['passed'])
+					output_success_text('Filter code allowed this transaction'.$suffix);
+				else
+					output_error_text('Filter code blocked this transaction with the reason: '.$suffix."\n".$testtxfilter['reason']);
+				
+				if ($showcallbacks)
+					output_filter_test_callbacks($testtxfilterraw);
 					
-					if ($_POST['callbacks'])
-						output_filter_test_callbacks($testtxfilterraw);
-						
-				} else
-					output_error_text('Filter code failed to compile:'."\n".$testtxfilter['reason']);
-			}
+			} else
+				output_error_text('Filter code failed to compile:'."\n".$testtxfilter['reason']);
 		}
 	}
 	
@@ -271,7 +281,24 @@
 							<div class="col-sm-offset-3 col-sm-9">
 								<input class="btn btn-default" type="submit" name="testtxfiltersend" value="Test Sending Asset with This Filter">
 								&nbsp;
-								<input type="checkbox" name="callbacks" id="callbacks" value="1" <?php echo @$_POST['callbacks'] ? 'checked' : ''?>> <label class="control-label" for="callbacks" style="font-weight:normal;">Display callback results</label>
+								<input type="checkbox" name="sendcallbacks" id="sendcallbacks" value="1" <?php echo @$_POST['sendcallbacks'] ? 'checked' : ''?>> <label class="control-label" for="sendcallbacks" style="font-weight:normal;">Display callback results</label>
+							</div>
+						</div>
+						<div class="form-group">
+							&nbsp;
+						</div>
+						<div class="form-group">
+							<label for="rawtx" class="col-sm-3 control-label">Test raw transaction:</label>
+							<div class="col-sm-9">
+								<textarea class="form-control" style="font-family:monospace;" rows="12" name="rawtx" id="rawtx"><?php echo html($_POST['rawtx']);?></textarea>
+								<span id="helpBlock" class="help-block">Raw transactions can be created using the <code>multichain-cli</code> command line tool and the <code>createrawsendfrom</code> or <code>createrawtransaction</code> command.</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-3 col-sm-9">
+								<input class="btn btn-default" type="submit" name="testtxfilterraw" value="Test Sending Raw Transaction with This Filter">
+								&nbsp;
+								<input type="checkbox" name="rawcallbacks" id="rawcallbacks" value="1" <?php echo @$_POST['rawcallbacks'] ? 'checked' : ''?>> <label class="control-label" for="rawcallbacks" style="font-weight:normal;">Display callback results</label>
 							</div>
 						</div>
 						<div class="form-group">
