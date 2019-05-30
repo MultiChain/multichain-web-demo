@@ -1,26 +1,18 @@
 <?php
-	
-	function read_config()
+
+	function read_config($configFile="config.ini", $checkDepth=3)
 	{
-		$config=array();
-		
-		$contents=file_get_contents('config.txt');
-		$lines=explode("\n", $contents);
-		
-		foreach ($lines as $line) {
-			$content=explode('#', $line);
-			$fields=explode('=', trim($content[0]));
-			if (count($fields)==2) {
-				if (is_numeric(strpos($fields[0], '.'))) {
-					$parts=explode('.', $fields[0]);
-					$config[$parts[0]][$parts[1]]=$fields[1];
-				} else {
-					$config[$fields[0]]=$fields[1];
-				}
+		$configPath = "";
+
+		while ($checkDepth > 0) {
+			if (file_exists($configPath . $configFile) ) {
+				break;
 			}
+			$configPath .= ".." . DIRECTORY_SEPARATOR;
+			$checkDepth -= 1;
 		}
-		
-		return $config;
+
+		return parse_ini_file($configPath . $configFile, true);
 	}
 	
 	function json_rpc_send($host, $port, $user, $password, $method, $params=array(), &$rawresponse=false)
