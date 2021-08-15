@@ -23,14 +23,14 @@
 		return $config;
 	}
 	
-	function json_rpc_send($host, $port, $user, $password, $method, $params=array(), &$rawresponse=false)
+	function json_rpc_send($host, $port, $secure, $user, $password, $method, $params=array(), &$rawresponse=false)
 	{
 		if (!function_exists('curl_init')) {
 			output_html_error('This web demo requires the curl extension for PHP. Please contact your web hosting provider or system administrator for assistance.');
 			exit;
 		}
 		
-		$url='http://'.$host.':'.$port.'/';
+		$url=($secure ? 'https' : 'http').'://'.$host.':'.$port.'/';
 				
 		$payload=json_encode(array(
 			'id' => time(),
@@ -56,8 +56,7 @@
 			$rawresponse=$response;
 		
 	//	echo '<PRE>'; print_r($response); echo '</PRE>';
-		
-		
+				
 		$result=json_decode($response, true);
 		
 		if (!is_array($result)) {
@@ -84,8 +83,8 @@
 		
 		$args=func_get_args();
 		
-		return json_rpc_send($multichain_chain['rpchost'], $multichain_chain['rpcport'], $multichain_chain['rpcuser'],
-			$multichain_chain['rpcpassword'], $method, array_slice($args, 1));
+		return json_rpc_send($multichain_chain['rpchost'], $multichain_chain['rpcport'], $multichain_chain['rpcsecure'],
+			$multichain_chain['rpcuser'], $multichain_chain['rpcpassword'], $method, array_slice($args, 1));
 	}
 	
 	function multichain_with_raw(&$rawresponse, $method) // other params read from func_get_args()
@@ -95,8 +94,8 @@
 		$args=func_get_args();
 		$rawresponse='';
 		
-		return json_rpc_send($multichain_chain['rpchost'], $multichain_chain['rpcport'], $multichain_chain['rpcuser'],
-			$multichain_chain['rpcpassword'], $method, array_slice($args, 2), $rawresponse);
+		return json_rpc_send($multichain_chain['rpchost'], $multichain_chain['rpcport'], $multichain_chain['rpcsecure'],
+			$multichain_chain['rpcuser'], $multichain_chain['rpcpassword'], $method, array_slice($args, 2), $rawresponse);
 	}
 	
 	function output_html_error($html)

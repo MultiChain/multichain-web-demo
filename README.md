@@ -50,7 +50,7 @@ System Requirements
 
 * A computer running web server software such as Apache.
 * PHP 5.x or later with the `curl` and `JSON` extensions.
-* MultiChain 1.0 alpha 26 or later, including MultiChain 2.0 alphas and betas.
+* MultiChain 1.0 alpha 26 or later, including MultiChain 2.x.
 
 
 Create and launch a MultiChain Blockchain
@@ -92,7 +92,8 @@ In the web demo directory, copy the `config-example.txt` file to `config.txt`:
 In the demo website directory, enter chain details in `config.txt` e.g.:
 
     default.name=Default                # name to display in the web interface
-    default.rpchost=127.0.0.1           # IP address of MultiChain node
+    default.rpchost=127.0.0.1           # IP address or domain of MultiChain node
+    default.rpcsecure=0                 # set to 1 to access RPC via https (e.g. for MultiChain on Azure)
     default.rpcport=12345               # usually default-rpc-port from params.dat
     default.rpcuser=multichainrpc       # username for RPC from multichain.conf
     default.rpcpassword=mnBh8aHp4mun... # password for RPC from multichain.conf
