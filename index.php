@@ -10,7 +10,7 @@
 	else
 		$name='';
 
-	set_multichain_chain($config[$chain]);
+	set_multichain_chain(@$config[$chain]);
 		
 ?>
 <html>
