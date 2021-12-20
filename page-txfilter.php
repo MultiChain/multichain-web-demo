@@ -7,7 +7,7 @@
 	
 	$keyforentities=array();
 	for ($forentity=1; $forentity<=const_max_for_entities; $forentity++)
-		if (strlen($_POST['for'.$forentity]))
+		if (strlen(@$_POST['for'.$forentity]))
 			$keyforentities[$_POST['for'.$forentity]]=true;
 			
 	$restrictions=count($keyforentities) ? array('for' => array_keys($keyforentities)) : false;
